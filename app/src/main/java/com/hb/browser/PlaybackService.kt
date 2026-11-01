@@ -43,8 +43,8 @@ class PlaybackService : Service() {
             setCallback(object : MediaSession.Callback() {
                 override fun onPlay() = WebHolder.setPlaying(true)
                 override fun onPause() = WebHolder.setPlaying(false)
-                override fun onSkipToNext() = WebHolder.next()
-                override fun onSkipToPrevious() = WebHolder.prev()
+                override fun onSkipToNext() { WebHolder.next() }
+                override fun onSkipToPrevious() { WebHolder.prev() }
             })
             isActive = true
         }
