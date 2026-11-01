@@ -41,8 +41,8 @@ class PlaybackService : Service() {
         )
         session = MediaSession(this, "HB_Browser").apply {
             setCallback(object : MediaSession.Callback() {
-                override fun onPlay() = WebHolder.setPlaying(true)
-                override fun onPause() = WebHolder.setPlaying(false)
+                override fun onPlay() = WebHolder.requestPlay(true)
+                override fun onPause() = WebHolder.requestPlay(false)
                 override fun onSkipToNext() { WebHolder.next() }
                 override fun onSkipToPrevious() { WebHolder.prev() }
             })
@@ -55,7 +55,7 @@ class PlaybackService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         goForeground()
         when (intent?.action) {
-            A_TOGGLE -> WebHolder.setPlaying(!WebHolder.playing)
+            A_TOGGLE -> WebHolder.requestPlay(!WebHolder.playing)
             A_NEXT -> WebHolder.next()
             A_PREV -> WebHolder.prev()
         }
