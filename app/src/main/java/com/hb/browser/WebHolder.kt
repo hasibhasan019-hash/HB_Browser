@@ -127,7 +127,7 @@ object WebHolder {
 
     private fun js(code: String) = main.post { webView?.evaluateJavascript("(function(){$code})();", null) }
 
-    fun setPlaying(play: Boolean) {
+    fun requestPlay(play: Boolean) {
         js("var v=document.querySelector('video'); if(v){ " + (if (play) "v.play()" else "v.pause()") + " }")
         playing = play
         PlaybackService.instance?.refresh()
